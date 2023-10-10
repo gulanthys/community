@@ -2,10 +2,37 @@ server:
   port: 8080
 spring:
   application:
-    name: community-user
+    name: community-user #服务名称
   cloud:
     nacos:
-      server-addr: localhost:8848
+      server-addr: localhost:8848 #服务地址
+  #MySQL
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/community-user?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=true
+    username: root
+    password: WX030330.
+
+#MyBatis-plus
+mybatis-plus:
+  # 指定Mapper XML文件的位置，使用classpath通配符指定路径。
+  mapper-locations: classpath*:org/gulanthys/user/mapper/xml/*Mapper.xml
+  # 指定实体类的包路径，用于自动扫描并注册类型别名。
+  type-aliases-package: org.gulanthys.user.mapper.*
+  # 全局配置
+  global-config:
+    db-config:
+      # 主键ID的生成策略，可选值包括：AUTO、NONE、INPUT、ID_WORKER、UUID
+      id-type: auto
+      #驼峰下划线转换（将数据库字段的下划线命名规则转换为 Java 实体类属性的驼峰命名规则）
+      table-underline: true
+  configuration:
+    # 将 Java 实体类属性的驼峰命名规则转换为数据库字段的下划线命名规则
+    map-underscore-to-camel-case: true
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    # 是否开启二级缓存。
+    cache-enabled: false
 
 #feign远程调用
 feign:
