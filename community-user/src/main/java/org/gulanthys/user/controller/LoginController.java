@@ -4,16 +4,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.community.common.Result;
 import org.gulanthys.user.entity.User;
 import org.gulanthys.user.service.LoginService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
 @Slf4j
 @RestController
-//@RequestMapping("/log")
+@RequestMapping("/log")
 public class LoginController {
     /**
      * 登录
