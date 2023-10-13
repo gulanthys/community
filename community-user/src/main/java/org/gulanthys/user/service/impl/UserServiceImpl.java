@@ -5,47 +5,28 @@ import lombok.extern.slf4j.Slf4j;
 import org.gulanthys.user.entity.User;
 import org.gulanthys.user.mapper.UserMapper;
 import org.gulanthys.user.service.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Random;
+import javax.annotation.Resource;
+
 
 @Service
 @Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
-    @Override
-    public boolean save(User entity) {
-        entity.setUserId(generateUniqueUserId(entity.getId()));
-        entity.setUserName(generateRandomString());
-        return super.save(entity);
-    }
+    @Resource
+    private PasswordEncoder passwordEncoder;
 
     /**
-     * 生成随机10位字符串
+     * 添加用户信息，密码加密
      *
-     * @return String字符串
+     * @param user 用户信息
+     * @return res
      */
-    private String generateRandomString() {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        StringBuilder randomString = new StringBuilder(10);
-        Random random = new Random();
-
-        for (int i = 0; i < 10; i++) {
-            int index = random.nextInt(characters.length());
-            char randomChar = characters.charAt(index);
-            randomString.append(randomChar);
-        }
-
-        return randomString.toString();
-    }
-
-    /**
-     * 初始userId
-     *
-     * @param userId
-     * @return
-     */
-    private int generateUniqueUserId(int userId) {
-        int res = userId + 100000000;
+    public boolean insert(User user) {
+        //对密码进行编码，生成盐
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        boolean res = save(user);
         return res;
     }
 }

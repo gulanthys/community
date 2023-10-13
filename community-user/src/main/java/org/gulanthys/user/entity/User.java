@@ -7,23 +7,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "information")
+@TableName(value = "user_information")
 public class User implements Serializable {
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
-    /**
-     * 序号
-     */
-    @TableId(type = IdType.AUTO)
-    private Integer id;
+
     /**
      * uid
      */
-    private int userId;
+    @TableId(type = IdType.AUTO)
+    private Integer uid;
     /**
      * 用户名
      */
@@ -31,7 +30,7 @@ public class User implements Serializable {
     /**
      * 性别
      */
-    private String sex;
+    private Integer sex;
     /**
      * 身份证
      */
@@ -52,27 +51,25 @@ public class User implements Serializable {
      * 生日
      */
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private Data birth;
+    private Date birth;
     /**
      * 权限
      */
-    @TableField(fill = FieldFill.INSERT)
     private Integer power;
     /**
      * 使用状态
      */
-    @TableField(fill = FieldFill.INSERT)
-    private int status;
+    private Integer status;
     /**
      * 注册时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @TableField(fill = FieldFill.INSERT)
-    private Data createTime;
+    private Date createTime;
     /**
      * 修改时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Data updateTime;
+    private Date updateTime;
 }

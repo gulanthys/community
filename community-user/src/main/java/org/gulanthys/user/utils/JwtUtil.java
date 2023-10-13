@@ -1,4 +1,4 @@
-package org.community.common.utils;
+package org.gulanthys.user.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -11,13 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author syh
- * @date 2022-10-30 14:39
- * JWT工具类
- */
 public class JwtUtil {
-
     /**
      * 过期时间2小时，单位毫秒
      */
