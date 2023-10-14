@@ -1,7 +1,8 @@
 package org.gulanthys.user.filter;
 
 
-import org.apache.commons.lang.StringUtils;
+import io.jsonwebtoken.Claims;
+import org.apache.commons.lang3.StringUtils;
 import org.gulanthys.user.entity.LoginUser;
 import org.gulanthys.user.utils.JwtUtil;
 import org.gulanthys.user.utils.RedisUtil;
@@ -17,7 +18,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -40,20 +40,25 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             return;
         }
         //解析token
-        Map<String, String> claims = JwtUtil.getMemberIdByJwtToken(token);
-        if (claims.isEmpty()) {
-            throw new RuntimeException("token为空");
+        String userid;
+        try {
+            Claims claims = JwtUtil.parseJWT(token);
+            userid = claims.getSubject();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("token非法");
         }
+
         //从redis中获取用户信息
-        String redisKey = "login:" + claims.get("userId");
-        LoginUser loginUser = redisUtil.getCacheObject(redisKey);
+        String redisKey = "login:" + userid;
+        LoginUser loginUser = (LoginUser) redisUtil.get(redisKey);
         if (Objects.isNull(loginUser)) {
             throw new RuntimeException("用户未登录");
         }
         //存入SecurityContextHolder
         //TODO 获取权限信息封装到 Authentication 中
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(loginUser, null, null);
+                new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         //放行
         filterChain.doFilter(request, response);

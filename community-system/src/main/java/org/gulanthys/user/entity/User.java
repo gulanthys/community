@@ -12,7 +12,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "user_information")
+@TableName(value = "sys_user")
 public class User implements Serializable {
 
     @TableField(exist = false)
@@ -52,10 +52,7 @@ public class User implements Serializable {
      */
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birth;
-    /**
-     * 权限
-     */
-    private Integer power;
+
     /**
      * 使用状态
      */

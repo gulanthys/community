@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>community-user</artifactId>
+    <artifactId>community-system</artifactId>
 
     <packaging>jar</packaging>
 
@@ -41,8 +41,9 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
-                <version>1.2.33</version>
+                <version>2.0.32</version>
             </dependency>
+
             <!--jwt依赖-->
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
@@ -62,17 +63,17 @@
             </dependency>
 
             <!-- nacos服务发现依赖 -->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-            </dependency>
+            <!--            <dependency>-->
+            <!--                <groupId>com.alibaba.cloud</groupId>-->
+            <!--                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
+            <!--            </dependency>-->
             <!--        Feign客户端-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-openfeign</artifactId>
                 <version>2.2.2.RELEASE</version>
             </dependency>
-<!--            Feign数据连接池-->
+            <!--            Feign数据连接池-->
             <dependency>
                 <groupId>io.github.openfeign</groupId>
                 <artifactId>feign-httpclient</artifactId>

@@ -11,7 +11,7 @@
 
     <modules>
         <module>community-common</module>
-        <module>community-user</module>
+        <module>community-system</module>
         <module>community-document</module>
         <module>community-friends</module>
         <module>Gateway</module>

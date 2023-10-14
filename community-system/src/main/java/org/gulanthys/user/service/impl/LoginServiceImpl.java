@@ -42,12 +42,11 @@ public class LoginServiceImpl implements LoginService {
         //认证通过生成jwtToken
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
         String uid = loginUser.getUser().getUid().toString();
-        String userName = loginUser.getUser().getUserName();
-        String jwtToken = JwtUtil.getJwtToken(userName, uid);
+        String jwtToken = JwtUtil.createJWT(uid);
         Map<String, String> map = new HashMap<>();
         map.put("token", jwtToken);
         //将完整的用户信息存入redis
-        redisUtil.setCacheObject("login:" + uid, loginUser);
+        redisUtil.set("login:" + uid, loginUser);
         return Result.buildResult(Constants.Status.OK, "登录成功", map);
     }
 
@@ -58,7 +57,7 @@ public class LoginServiceImpl implements LoginService {
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
         Integer uid = loginUser.getUser().getUid();
         //删除redis中的值
-        redisUtil.deleteObject("login:" + uid);
+        redisUtil.del("login:" + uid);
         return Result.buildResult(Constants.Status.OK, "注销成功");
     }
 }

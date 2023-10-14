@@ -1,51 +1,39 @@
 package org.gulanthys.user.config;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * redis配置类
- *
- * @author zhangzhixiang
- * @date 2019年06月19日
  */
 @Configuration
 public class RedisConfig {
     @Bean
     @SuppressWarnings("all")
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
-        //创建RedisTemplate对象
         RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
-        //设置连接工厂
         template.setConnectionFactory(factory);
 
-        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+        // Json序列化配置
 
-        ObjectMapper om = new ObjectMapper();
 
-        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        GenericFastJsonRedisSerializer fastJsonRedisSerializer = new GenericFastJsonRedisSerializer();
 
-        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-
-        jackson2JsonRedisSerializer.setObjectMapper(om);
-
+        // String 的序列化,解决redis存储字符串是转义字符,看着像乱码
         StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
+
         // key采用String的序列化方式
         template.setKeySerializer(stringRedisSerializer);
         // hash的key也采用String的序列化方式
         template.setHashKeySerializer(stringRedisSerializer);
-        // value序列化方式采用jackson
-        template.setValueSerializer(jackson2JsonRedisSerializer);
-        // hash的value序列化方式采用jackson
-        template.setHashValueSerializer(jackson2JsonRedisSerializer);
-
+        // value 序 列 化 方 式 采 用 jackson
+        template.setValueSerializer(fastJsonRedisSerializer);
+        // hash 的 value 序 列 化 方 式 采 用 jackson
+        template.setHashValueSerializer(fastJsonRedisSerializer);
         template.afterPropertiesSet();
         return template;
     }
