@@ -7,7 +7,7 @@ import lombok.Data;
 import java.sql.Timestamp;
 
 @Data
-//@TableName(value = "private_message")
+@TableName(value = "private_message")
 public class PrivateMessage {
 
   /**
