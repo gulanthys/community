@@ -1,5 +1,6 @@
 package org.gulanthys.system.service.impl;
 
+import jakarta.annotation.Resource;
 import org.community.common.Constants;
 import org.community.common.Result;
 import org.gulanthys.system.entity.LoginUser;
@@ -13,7 +14,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;

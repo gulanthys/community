@@ -1,14 +1,13 @@
 package org.gulanthys.system.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.gulanthys.system.entity.User;
 import org.gulanthys.system.mapper.UserMapper;
 import org.gulanthys.system.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 
 @Service
