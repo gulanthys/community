@@ -1,4 +1,4 @@
-package org.gulanthys.Gateway;
+package org.gulanthys.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
