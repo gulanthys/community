@@ -45,8 +45,8 @@ mybatis-plus:
   global-config:
     db-config:
       table-underline: true
-  mapper-locations: classpath*:org/gulanthys/system/mapper/xml/*Mapper.xml
-  type-aliases-package: org.gulanthys.system.entity
+  mapper-locations: classpath*:org/gulanthys/user/mapper/xml/*Mapper.xml
+  type-aliases-package: org.gulanthys.user.entity
 
 #feign远程调用
 feign:

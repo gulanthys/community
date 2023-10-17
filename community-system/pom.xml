@@ -25,12 +25,13 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>3.5.2</version>
+                <version>3.5.3.1</version>
             </dependency>
             <!-- mysql依赖 -->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
+                <version>8.0.28</version>
             </dependency>
             <!-- redis依赖-->
             <dependency>
@@ -48,7 +49,7 @@
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt</artifactId>
-                <version>0.9.0</version>
+                <version>0.9.1</version>
             </dependency>
 
             <!--springboot启动器-->
@@ -68,17 +69,17 @@
             <!--                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
             <!--            </dependency>-->
             <!--        Feign客户端-->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-openfeign</artifactId>
-                <version>2.2.2.RELEASE</version>
-            </dependency>
-            <!--            Feign数据连接池-->
-            <dependency>
-                <groupId>io.github.openfeign</groupId>
-                <artifactId>feign-httpclient</artifactId>
-                <version>11.2</version>
-            </dependency>
+            <!--            <dependency>-->
+            <!--                <groupId>org.springframework.cloud</groupId>-->
+            <!--                <artifactId>spring-cloud-starter-openfeign</artifactId>-->
+            <!--                <version>2.2.2.RELEASE</version>-->
+            <!--            </dependency>-->
+            <!--            &lt;!&ndash;            Feign数据连接池&ndash;&gt;-->
+            <!--            <dependency>-->
+            <!--                <groupId>io.github.openfeign</groupId>-->
+            <!--                <artifactId>feign-httpclient</artifactId>-->
+            <!--                <version>11.2</version>-->
+            <!--            </dependency>-->
         </dependencies>
 
 

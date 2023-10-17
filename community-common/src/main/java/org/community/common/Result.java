@@ -17,18 +17,18 @@ public class Result<T> implements Serializable {
      */
     private T data;
 
-    private Result(String status, String message, T data) {
+    public Result(String status, String message, T data) {
         this.status = status;
         this.message = message;
         this.data = data;
     }
 
-    private Result(String status, String message) {
+    public Result(String status, String message) {
         this.status = status;
         this.message = message;
     }
 
-    private Result(String message) {
+    public Result(String message) {
         this.message = message;
     }
 
