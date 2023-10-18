@@ -1,7 +1,9 @@
 package com.yanty.friends.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.sql.Timestamp;
@@ -34,10 +36,12 @@ public class PrivateMessage {
    * 状态
    * 0：未读  1：已读  2：删除
    */
-  private long status;
+  private int status;
   /**
    * 创建时间
    */
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+  @TableField(fill = FieldFill.INSERT)
   private Timestamp createTime;
 
 
