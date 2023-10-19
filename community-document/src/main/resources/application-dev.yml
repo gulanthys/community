@@ -1,6 +1,21 @@
+#server:
+#  port:
 spring:
-  application:
-    name: user-service
-  cloud:
-    nacos:
-      server-addr: localhost:8848  #nacos服务地址
+#  datasource:
+#    url:
+#    username:
+#    password:
+#    driver-class-name:
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 5MB
+mybatis-plus:
+  configuration:
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      table-underline: true
+  mapper-locations: classpath*:org/love_156/document/mapper/xml/*Mapper.xml
+  type-aliases-package: org.love_156.document.entity
