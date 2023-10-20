@@ -28,10 +28,23 @@ public class LoginServiceImpl implements LoginService {
     private AuthenticationManager authenticationManager;
 
     @Override
-    public Result<?> Login(User user) {
+    public Map<String, String> Login(User user) {
+        String login = null;
+        if (!Objects.isNull(user.getUid())) {
+            login = user.getUid().toString();
+        }
+        if (!Objects.isNull(user.getPhone())) {
+            login = user.getPhone();
+        }
+        if (!Objects.isNull(user.getEmail())) {
+            login = user.getEmail();
+        }
+        if (!Objects.isNull(user.getIdCard())) {
+            login = user.getIdCard();
+        }
         //存储认证信息
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword());
+                new UsernamePasswordAuthenticationToken(login, user.getPassword());
 
         //对认证信息进行认证
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
@@ -44,19 +57,17 @@ public class LoginServiceImpl implements LoginService {
         //成功则存入LoginUser
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
 
-        //获取当前用户的id
         String uid = loginUser.getUser().getUid().toString();
-
         //通过Jwt创建token并存入map
         Long time = 24 * 60 * 60 * 1000L;// 60 * 60 *1000  一个小时
-        String token = JwtUtil.createJWT(uid, time);
+        String token = JwtUtil.createJWT(uid.toString(), time);
         Map<String, String> map = new HashMap<>();
         map.put("token", token);
 
         //将用户信息存入redis
         redisUtil.set(address + uid, loginUser);
 
-        return Result.buildResult(Constants.Status.OK, "登录成功", map);
+        return map;
     }
 
     @Override

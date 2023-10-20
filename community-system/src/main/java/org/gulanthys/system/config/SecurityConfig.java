@@ -32,7 +32,6 @@ public class SecurityConfig {
         //添加过滤器
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
-
         return http.build();
     }
 
