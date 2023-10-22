@@ -16,27 +16,33 @@ public class PrivateMessage {
    * 消息id
    */
   private long id;
+
   /**
    * 作者
    */
-  private long authorId;
+  private long senderId;
+
   /**
    * 读者
    */
-  private long readerId;
+  private long receiverId;
+
   /**
    * 会话id
    */
   private String conversationId;
+
   /**
    * 内容
    */
   private String content;
+
   /**
    * 状态
    * 0：未读  1：已读  2：删除
    */
   private int status;
+
   /**
    * 创建时间
    */

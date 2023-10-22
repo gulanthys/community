@@ -11,6 +11,10 @@ import java.util.Map;
 
 public class WebSocketInterceptor implements HandshakeInterceptor {
 
+    /**
+     * 请求URL
+     * ws://localhost:8080/ws/message/{uid}
+     */
     @Override
     public boolean beforeHandshake(@NonNull ServerHttpRequest request, @NonNull ServerHttpResponse response, @NonNull WebSocketHandler wsHandler, @NonNull Map<String, Object> attributes) throws Exception {
         if (request instanceof ServletServerHttpRequest) {
