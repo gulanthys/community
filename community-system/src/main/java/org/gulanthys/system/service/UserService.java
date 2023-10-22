@@ -5,5 +5,5 @@ import org.gulanthys.system.entity.User;
 
 
 public interface UserService extends IService<User> {
-    public boolean insert(User user);
+
 }
