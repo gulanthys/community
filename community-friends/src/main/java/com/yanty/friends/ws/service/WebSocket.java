@@ -7,20 +7,38 @@ import org.springframework.web.socket.WebSocketSession;
 import java.io.IOException;
 import java.util.Set;
 
+
+/**
+ * message统一格式
+ * 前端 --> 后端：
+ * {
+ *     "receiverId": "user456",
+ *     "content": "你好，今晚一起吃晚饭吗？"
+ * }
+ *
+ * 后端 --> 前端：
+ * {
+ *     “isSystemMessage”: "false",
+ *     "senderId": "user123",
+ *     "receiverId": "user456",
+ *     "content": "你好，今晚一起吃晚饭吗？"
+ * }
+ *
+ */
 public interface WebSocket {
     /**
      * 会话开始回调
      *
      * @param session 会话
      */
-    void handleOpen(WebSocketSession session);
+    void handleOpen(WebSocketSession session) throws IOException;
 
     /**
      * 会话结束回调
      *
      * @param session 会话
      */
-    void handleClose(WebSocketSession session);
+    void handleClose(WebSocketSession session) throws IOException;
 
     /**
      * 处理消息
@@ -28,7 +46,7 @@ public interface WebSocket {
      * @param session 会话
      * @param message 接收的消息
      */
-    void handleMessage(WebSocketSession session, String message);
+    void handleMessage(WebSocketSession session, String message) throws IOException;
 
     /**
      * 发送消息
@@ -89,13 +107,6 @@ public interface WebSocket {
      * @param error   异常
      */
     void handleError(WebSocketSession session, Throwable error);
-
-    /**
-     * 获得所有的 websocket 会话
-     *
-     * @return 所有 websocket 会话
-     */
-    Set<WebSocketSession> getSessions();
 
     /**
      * 得到当前连接数

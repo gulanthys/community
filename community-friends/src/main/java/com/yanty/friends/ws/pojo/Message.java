@@ -13,7 +13,7 @@ public class Message {
     /**
      * 消息接受者
      */
-    private String toName;
+    private String receiverId;
 
     /**
      * 内容

@@ -12,14 +12,21 @@ public class ResultMessage {
     /**
      * 是否为系统通知
      */
-    private boolean system;
+    private boolean isSystemMessage;
+
     /**
-     * 消息接收者
+     * 消息发送者
      */
-    private String toName;
+    private String senderId;
+
+//    /**
+//     * 消息接受者
+//     */
+//    private String receiverId;
+
     /**
      * 内容
      */
-    private String content;
+    private Object content;
 
 }

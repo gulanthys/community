@@ -19,8 +19,6 @@ public class RedisConfig {
         template.setConnectionFactory(factory);
 
         // Json序列化配置
-
-
         GenericFastJsonRedisSerializer fastJsonRedisSerializer = new GenericFastJsonRedisSerializer();
 
         // String 的序列化,解决redis存储字符串是转义字符,看着像乱码

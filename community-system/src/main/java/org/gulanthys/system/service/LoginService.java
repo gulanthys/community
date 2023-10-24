@@ -3,8 +3,10 @@ package org.gulanthys.system.service;
 import org.community.common.Result;
 import org.gulanthys.system.entity.User;
 
+import java.util.Map;
+
 public interface LoginService {
-    Result<?> Login(User user);
+    Map<?, ?> Login(User user);
 
     Result<?> Logout();
 }
