@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.socket.*;
 
+import java.io.IOException;
+
 public class DefaultWebSocketHandler implements WebSocketHandler {
 
     @Autowired
@@ -15,7 +17,7 @@ public class DefaultWebSocketHandler implements WebSocketHandler {
      * @param session Session
      */
     @Override
-    public void afterConnectionEstablished(@NonNull WebSocketSession session) {
+    public void afterConnectionEstablished(@NonNull WebSocketSession session) throws IOException {
         webSocket.handleOpen(session);
     }
 
@@ -25,7 +27,7 @@ public class DefaultWebSocketHandler implements WebSocketHandler {
      * @param message 消息
      */
     @Override
-    public void handleMessage(@NonNull WebSocketSession session, @NonNull WebSocketMessage<?> message) {
+    public void handleMessage(@NonNull WebSocketSession session, @NonNull WebSocketMessage<?> message) throws IOException {
         if (message instanceof TextMessage) {
             TextMessage textMessage = (TextMessage) message;
             webSocket.handleMessage(session, textMessage.getPayload());
@@ -49,7 +51,7 @@ public class DefaultWebSocketHandler implements WebSocketHandler {
      * @param closeStatus 关闭状态
      */
     @Override
-    public void afterConnectionClosed(@NonNull WebSocketSession session, @NonNull CloseStatus closeStatus) {
+    public void afterConnectionClosed(@NonNull WebSocketSession session, @NonNull CloseStatus closeStatus) throws IOException {
         webSocket.handleClose(session);
     }
 
