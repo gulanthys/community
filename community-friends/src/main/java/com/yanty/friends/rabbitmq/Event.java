@@ -1,6 +1,12 @@
 package com.yanty.friends.rabbitmq;
 
 
+import lombok.Data;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Data
 public class Event {
 
     /**
@@ -9,8 +15,9 @@ public class Event {
     private String routing;
 
     /**
-     *
+     * 事件数据
      */
+    private final Map<String, Object> data = new HashMap<>();
 
 
 }

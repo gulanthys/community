@@ -1,9 +1,13 @@
 package com.yanty.friends.ws.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.yanty.friends.rabbitmq.Event;
+import com.yanty.friends.rabbitmq.Producer;
+import com.yanty.friends.rabbitmq.RabbitMQConstant;
 import com.yanty.friends.ws.pojo.Message;
-import com.yanty.friends.ws.service.WebSocket;
+import com.yanty.friends.ws.service.WebSocketService;
 import com.yanty.friends.utils.WebsocketUtils;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -15,7 +19,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 @Slf4j
-public class WebSocketImpl implements WebSocket {
+public class WebSocketServiceImpl implements WebSocketService, RabbitMQConstant {
+
+    @Resource
+    private Producer producer;
+
 
     /**
      * 在线连接数（线程安全）
@@ -72,9 +80,17 @@ public class WebSocketImpl implements WebSocket {
         Message msg = JSONObject.parseObject(message, Message.class);
         //编写json格式message
         String jsonMessage = WebsocketUtils.getMessage(false, senderId, msg.getContent());
+        //构造event事件
+        Event event = new Event();
+        event.setRouting(PRIVATE_MESSAGE_ROUTING);
+        event.getData().put("receiverId", msg.getReceiverId());
+        event.getData().put("message", jsonMessage);
+
+        //使用RabbitMQ异步发送
+        producer.publishEvent(event);
         // 只处理前端传来的文本消息，并且直接丢弃了客户端传来的消息
-        log.info("收到一个来自：{} 的消息：{}", senderId, message);
-        sendMessage(msg.getReceiverId(), jsonMessage);
+        log.info("WebSocket收到一个来自：{} 的消息：{}", senderId, message);
+
     }
 
     /**
@@ -110,8 +126,11 @@ public class WebSocketImpl implements WebSocket {
             if (receiverId.equals(userId)){
                 WebSocketSession session = sessions.get(userId);
                 session.sendMessage(message);
+                return;
             }
         }
+        //改该用户未在线，转离线
+
     }
 
 
