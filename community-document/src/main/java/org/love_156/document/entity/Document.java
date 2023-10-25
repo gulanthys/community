@@ -13,14 +13,14 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "doc_name")
+@TableName(value = "document")
 public class Document implements Serializable {
 
     /**
      * 作者Id
      */
     @TableId(type = IdType.AUTO)
-    private Integer AuthorID;
+    private Integer DocumentID;
     /**
      * 文章标题
      */
