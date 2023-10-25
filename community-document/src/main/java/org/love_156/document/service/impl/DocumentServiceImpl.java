@@ -7,6 +7,6 @@ import org.love_156.document.service.DocumentService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DocumentServiceImpl extends ServiceImpl<DocumentMapper, Document> implements DocumentService {
+public abstract class DocumentServiceImpl implements DocumentService {
 
 }

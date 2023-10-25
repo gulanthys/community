@@ -10,6 +10,7 @@ public class EditServiceImpl implements EditService {
 
     @Override
     public Result<?> CreateDocument(Document document) {
+
         return null;
     }
 
