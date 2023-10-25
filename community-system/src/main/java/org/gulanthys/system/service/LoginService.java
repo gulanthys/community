@@ -9,4 +9,6 @@ public interface LoginService {
     Map<?, ?> Login(User user);
 
     Result<?> Logout();
+
+
 }
