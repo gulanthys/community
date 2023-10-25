@@ -5,5 +5,5 @@ import org.gulanthys.system.entity.User;
 
 
 public interface UserService extends IService<User> {
-
+    boolean save(User entity);
 }

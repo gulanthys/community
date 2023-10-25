@@ -31,4 +31,5 @@ public class UserController {
         IPage<User> Data = userService.page(page, queryWrapper);
         return Result.buildResult(Constants.Status.OK, "查询成功", Data);
     }
+
 }

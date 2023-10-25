@@ -26,7 +26,7 @@ public class WebSecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/log/login").anonymous()
+                .requestMatchers("/log/login", "/log/register").anonymous()
                 .anyRequest().authenticated();
 
         //添加过滤器

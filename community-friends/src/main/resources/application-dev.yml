@@ -1,7 +1,7 @@
 
 spring:
   application:
-    name: user-service
+    name: Friend Service
   cloud:
     nacos:
       server-addr: localhost:8848  #nacos服务地址
