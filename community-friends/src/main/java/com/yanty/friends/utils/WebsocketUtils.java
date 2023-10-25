@@ -1,4 +1,4 @@
-package com.yanty.friends.ws.utils;
+package com.yanty.friends.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;

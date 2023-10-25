@@ -2,21 +2,15 @@ package com.yanty.friends.ws.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yanty.friends.ws.pojo.Message;
-import com.yanty.friends.ws.pojo.ResultMessage;
 import com.yanty.friends.ws.service.WebSocket;
-import com.yanty.friends.ws.utils.WebsocketUtils;
-import jakarta.websocket.server.ServerEndpoint;
+import com.yanty.friends.utils.WebsocketUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
