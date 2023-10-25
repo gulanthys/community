@@ -1,5 +1,2 @@
 nacos启动
 D:\nacos\bin\startup.cmd -m standalone
-
-RabbitMQ启动
-C:\Program Files\RabbitMQ Server\rabbitmq_server-3.12.7\sbin\rabbitmq-service.bat
