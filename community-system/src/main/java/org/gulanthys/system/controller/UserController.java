@@ -26,6 +26,7 @@ public class UserController {
                                     @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
 
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getUid, user.getUid());
         IPage<User> page = new Page<>(pageNo, pageSize);
         IPage<User> Data = userService.page(page, queryWrapper);
         return Result.buildResult(Constants.Status.OK, "查询成功", Data);
