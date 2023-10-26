@@ -18,6 +18,7 @@ public class LoginUser implements UserDetails {
     private User user;
 
     private List<String> permissions;
+
     @JSONField(serialize = false)
     private List<SimpleGrantedAuthority> authorities;
 
