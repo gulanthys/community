@@ -20,7 +20,7 @@ public class Document implements Serializable {
      * 作者Id
      */
     @TableId(type = IdType.AUTO)
-    private Integer DocumentID;
+    private Integer DocumentId;
     /**
      * 文章标题
      */

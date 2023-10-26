@@ -9,7 +9,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/document")
 public class DocumentController {
-    @Resource
-    private DocumentService documentService;
 
 }
