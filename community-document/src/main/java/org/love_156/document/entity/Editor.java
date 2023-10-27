@@ -13,7 +13,7 @@ public class Editor {
     /**
      * 文章id
      */
-    private Integer DocumentId;
+    private Integer ArticleId;
     /**
      * 用户id
      */
