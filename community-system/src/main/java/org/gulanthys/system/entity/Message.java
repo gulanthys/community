@@ -1,4 +1,4 @@
-package com.yanty.friends.ws.pojo;
+package org.gulanthys.system.entity;
 
 
 import lombok.AllArgsConstructor;

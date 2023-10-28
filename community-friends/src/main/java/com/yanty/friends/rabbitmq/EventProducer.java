@@ -9,19 +9,20 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class Producer implements RabbitMQConstant{
+public class EventProducer implements RabbitMQConstant{
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
     /**
-     * 发布事件：私信
+     * 发布事件
      */
     public void publishEvent(Event event){
         //发布事件
-        rabbitTemplate.convertAndSend(PRIVATE_MESSAGE_TOPIC, JSON.toJSONString(event));
-        log.info("RabbitMQ接收到一个事件...");
+        rabbitTemplate.convertAndSend(event.getTopic(), JSON.toJSONString(event));
     }
+
+
 
 }
 

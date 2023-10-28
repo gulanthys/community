@@ -12,7 +12,7 @@ public class Event {
     /**
      * 事件绑定路由
      */
-    private String routing;
+    private String topic;
 
     /**
      * 事件数据

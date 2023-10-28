@@ -2,7 +2,7 @@ package com.yanty.friends.ws.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yanty.friends.rabbitmq.Event;
-import com.yanty.friends.rabbitmq.Producer;
+import com.yanty.friends.rabbitmq.EventProducer;
 import com.yanty.friends.rabbitmq.RabbitMQConstant;
 import com.yanty.friends.ws.pojo.Message;
 import com.yanty.friends.ws.service.WebSocketService;
@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class WebSocketServiceImpl implements WebSocketService, RabbitMQConstant {
 
     @Resource
-    private Producer producer;
+    private EventProducer producer;
 
 
     /**
@@ -33,7 +33,6 @@ public class WebSocketServiceImpl implements WebSocketService, RabbitMQConstant 
     /**
      * 线程安全的无序集合（存储会话）
      */
-//    private final CopyOnWriteArraySet<WebSocketSession> sessions = new CopyOnWriteArraySet<>();
     private final static Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
 
     /**
@@ -68,7 +67,7 @@ public class WebSocketServiceImpl implements WebSocketService, RabbitMQConstant 
     }
 
     /**
-     * 处理WebSocket接收到的消息
+     * 处理WebSocket接收到的消息：用户私信消息
      * @param session 会话
      * @param message 接收的消息
      */
@@ -82,14 +81,13 @@ public class WebSocketServiceImpl implements WebSocketService, RabbitMQConstant 
         String jsonMessage = WebsocketUtils.getMessage(false, senderId, msg.getContent());
         //构造event事件
         Event event = new Event();
-        event.setRouting(PRIVATE_MESSAGE_ROUTING);
+        event.setTopic(PRIVATE_MESSAGE_TOPIC);
         event.getData().put("receiverId", msg.getReceiverId());
         event.getData().put("message", jsonMessage);
-
         //使用RabbitMQ异步发送
         producer.publishEvent(event);
         // 只处理前端传来的文本消息，并且直接丢弃了客户端传来的消息
-        log.info("WebSocket收到一个来自：{} 的消息：{}", senderId, message);
+        log.info("WebSocket收到一个来自用户：\n{} 的消息：{}", senderId, message);
 
     }
 
@@ -106,9 +104,6 @@ public class WebSocketServiceImpl implements WebSocketService, RabbitMQConstant 
         session.sendMessage(message);
     }
 
-    /**
-     * 给
-     */
     @Override
     public void sendMessage(String receiverId, String message) throws IOException {
         this.sendMessage(receiverId, new TextMessage(message));
@@ -130,7 +125,7 @@ public class WebSocketServiceImpl implements WebSocketService, RabbitMQConstant 
             }
         }
         //改该用户未在线，转离线
-
+        log.info("用户：{}不在线，消息转为离线发送...", receiverId);
     }
 
 

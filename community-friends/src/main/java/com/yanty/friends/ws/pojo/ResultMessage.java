@@ -19,11 +19,6 @@ public class ResultMessage {
      */
     private String senderId;
 
-//    /**
-//     * 消息接受者
-//     */
-//    private String receiverId;
-
     /**
      * 内容
      */

@@ -12,8 +12,8 @@
     <artifactId>community-friends</artifactId>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -42,7 +42,7 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.2</version>
+            <version>3.5.3.1</version>
         </dependency>
         <!-- redis依赖-->
         <dependency>
@@ -64,7 +64,7 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
-            <version>2.2.2.RELEASE</version>
+            <version>4.0.0</version>
         </dependency>
         <!--Feign数据连接池-->
         <dependency>
@@ -84,5 +84,23 @@
         </dependency>
 
     </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**.*</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 
 </project>
