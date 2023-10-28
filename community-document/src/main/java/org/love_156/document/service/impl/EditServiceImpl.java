@@ -1,7 +1,7 @@
 package org.love_156.document.service.impl;
 
 import org.community.common.Result;
-import org.love_156.document.entity.Document;
+import org.love_156.document.entity.Article;
 import org.love_156.document.service.EditService;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class EditServiceImpl implements EditService {
 
     @Override
-    public Result<?> CreateDocument(Document document) {
+    public Result<?> CreateArticle(Article article) {
         return null;
     }
 

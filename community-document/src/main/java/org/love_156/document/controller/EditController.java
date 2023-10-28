@@ -1,20 +1,29 @@
 package org.love_156.document.controller;
 
+import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.community.common.Constants;
 import org.community.common.Result;
-import org.love_156.document.entity.Document;
+import org.love_156.document.entity.Article;
+import org.love_156.document.service.EditService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequestMapping("/blog")
 public class EditController {
+
+    @Resource
+    private EditService editService;
+
     @GetMapping("/creat")
-    public Result<?> CreateDocument(@RequestBody Document document){
-        String s = "用户创建文章";
-        return Result.buildResult(Constants.Status.OK,s);
+    public Result<?> CreateDocument(@RequestBody Article article){
+        log.info("用户请求创建文章");
+        editService.CreateArticle(article);
+        return Result.buildResult(Constants.Status.OK,"用户创建文章");
     }
     @GetMapping("/visit")
     public Result<?> Visit(){
