@@ -4,7 +4,7 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.community.common.Constants;
 import org.community.common.Result;
-import org.love_156.document.entity.Document;
+import org.love_156.document.entity.Article;
 import org.love_156.document.service.EditService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,9 +20,9 @@ public class EditController {
     private EditService editService;
 
     @GetMapping("/creat")
-    public Result<?> CreateDocument(@RequestBody Document document){
+    public Result<?> CreateDocument(@RequestBody Article article){
         log.info("用户请求创建文章");
-        Result result = editService.CreateDocument(document);
+        editService.CreateArticle(article);
         return Result.buildResult(Constants.Status.OK,"用户创建文章");
     }
     @GetMapping("/visit")

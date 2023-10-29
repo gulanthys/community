@@ -3,20 +3,20 @@ package org.love_156.document.entity;
 import java.util.Date;
 
 public class Edit {
-    private Document document;
+    private Article article;
     public Integer getID(){
-        return document.getDocumentId();
+        return article.getDocumentId();
     }
     public String getText(){
-        return document.getText();
+        return article.getText();
     }
     public String getTitle(){
-        return document.getTitle();
+        return article.getTitle();
     }
     public Date getCreatDate(){
-        return document.getCreatDate();
+        return article.getCreatDate();
     }
     public  Date getEditDate(){
-        return document.getEditDate();
+        return article.getEditDate();
     }
 }
