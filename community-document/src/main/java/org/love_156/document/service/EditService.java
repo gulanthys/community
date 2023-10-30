@@ -4,9 +4,9 @@ import org.community.common.Result;
 import org.love_156.document.entity.Article;
 
 public interface EditService {
-    Result<?> CreateArticle(Article article);
+    boolean CreateArticle(Article article);
+    Article Visit(int ArticleID);
     Result<?> Edit();
-    Result<?> Visit();
     Result<?> EditUpdate();
     Result<?> EditAbandon();
 }

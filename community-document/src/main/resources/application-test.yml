@@ -10,20 +10,6 @@ spring:
   #MySQL
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/community_document?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=true
+    url: jdbc:mysql://localhost:3306/community?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=true
     username: root
     password: 114514
-
-#feign远程调用
-feign:
-  client:
-    config:
-      default:
-        loggerLevel: BASIC #日志级别
-  #feign连接池
-  httpclient:
-    enabled: true #开启feign对HttpClient的支持
-    max-connections: 200  #最大的连接数
-    max-connections-per-route: 50 #每个路径的最大连接数
-  mapper-locations: classpath*:org/love_156/document/mapper/xml/*Mapper.xml
-  type-aliases-package: org.love_156.document.entity

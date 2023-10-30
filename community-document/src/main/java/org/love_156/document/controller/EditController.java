@@ -6,10 +6,7 @@ import org.community.common.Constants;
 import org.community.common.Result;
 import org.love_156.document.entity.Article;
 import org.love_156.document.service.EditService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -19,16 +16,26 @@ public class EditController {
     @Resource
     private EditService editService;
 
-    @GetMapping("/creat")
+    @PostMapping("/creat")
     public Result<?> CreateDocument(@RequestBody Article article){
         log.info("用户请求创建文章");
-        editService.CreateArticle(article);
-        return Result.buildResult(Constants.Status.OK,"用户创建文章");
+        log.info("文章标题是"+article.getTitle());
+        boolean createArticle = editService.CreateArticle(article);
+        if(createArticle){
+            return Result.buildResult(Constants.Status.OK,"用户创建文章成功");
+        }else {
+            return Result.buildResult(Constants.Status.BAD_REQUEST,"用户创建文章失败");
+        }
     }
     @GetMapping("/visit")
-    public Result<?> Visit(){
-        String test = "用户正在浏览";
-        return Result.buildResult(Constants.Status.OK,test);
+    public Result<?> Visit(@RequestParam("ArticleID") int ArticleID ){
+        log.info("用户正打算在浏览");
+        Article article = editService.Visit(ArticleID);
+        if (article == null){
+            return Result.buildResult(Constants.Status.NOT_FOUND,"未找到对应文章");
+        }else {
+            return Result.buildResult(Constants.Status.OK,article);
+        }
     }
     @GetMapping("/edit")
     public Result<?> Edit(){
