@@ -6,7 +6,9 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.ibatis.jdbc.Null;
 import org.community.common.Result;
 import org.love_156.document.entity.Article;
+import org.love_156.document.entity.EditPermission;
 import org.love_156.document.mapper.ArticleMapper;
+import org.love_156.document.mapper.EditPermissionMapper;
 import org.love_156.document.service.EditService;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +18,19 @@ public class EditServiceImpl implements EditService {
 
     @Resource
     private ArticleMapper articleMapper;
+    @Resource
+    private EditPermissionMapper editPermissionMapper;
 
     @Override
-    public boolean CreateArticle(Article article) {
+    public boolean CreateArticle(Article article,int CreatorID) {
         //收到文章信息后直接导入数据库
         log.info("系统正在添加文章");
         articleMapper.insert(article);
+        EditPermission editPermission = new EditPermission();
+        editPermission.setArticleId(article.getArticleId());
+        editPermission.setPermission(1);
+        editPermission.setUserId(CreatorID);
+        editPermissionMapper.insert(editPermission);
         return true;
     }
 

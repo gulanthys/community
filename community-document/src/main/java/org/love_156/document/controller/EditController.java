@@ -17,10 +17,10 @@ public class EditController {
     private EditService editService;
 
     @PostMapping("/creat")
-    public Result<?> CreateDocument(@RequestBody Article article){
+    public Result<?> CreateDocument(@RequestBody Article article,@RequestParam("CreatorID") int CreatorID){
         log.info("用户请求创建文章");
         log.info("文章标题是"+article.getTitle());
-        boolean createArticle = editService.CreateArticle(article);
+        boolean createArticle = editService.CreateArticle(article,CreatorID);
         if(createArticle){
             return Result.buildResult(Constants.Status.OK,"用户创建文章成功");
         }else {
@@ -43,7 +43,7 @@ public class EditController {
         return Result.buildResult(Constants.Status.OK,s);
     }
     @GetMapping("/edit/update")
-    public Result<?> EditUpdate(){
+    public Result<?> EditUpdate(@RequestBody Article article,@RequestParam("EditorID") int EditorID){
         String s = "更新文章";
         return Result.buildResult(Constants.Status.OK,s);
     }

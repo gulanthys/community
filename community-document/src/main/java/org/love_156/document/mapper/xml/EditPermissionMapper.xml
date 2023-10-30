@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.love_156.document.mapper.EditPermissionMapper">
+
+    <!--    <resultMap id="BlogPostResultMap" type="com.example.model.BlogPost">-->
+    <!--        <id column="id" property="id"/>-->
+    <!--        <result column="title" property="title"/>-->
+    <!--        <result column="content" property="content"/>-->
+    <!--    </resultMap>-->
+
+    <!--    <select id="selectBlogPostById" resultMap="BlogPostResultMap">-->
+    <!--        SELECT id, title, content FROM BlogPost WHERE id = #{id}-->
+    <!--    </select>-->
+
+    <!--    <insert id="insertBlogPost" parameterType="com.example.model.BlogPost">-->
+    <!--        INSERT INTO BlogPost (title, content) VALUES (#{title}, #{content})-->
+    <!--    </insert>-->
+    <!--    万一呢？  -->
+</mapper>
