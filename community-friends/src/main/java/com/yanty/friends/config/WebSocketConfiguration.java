@@ -2,8 +2,10 @@ package com.yanty.friends.config;
 
 import com.yanty.friends.ws.DefaultWebSocketHandler;
 import com.yanty.friends.ws.WebSocketInterceptor;
-import com.yanty.friends.ws.service.WebSocket;
-import com.yanty.friends.ws.service.impl.WebSocketImpl;
+import com.yanty.friends.ws.service.WebSocketService;
+import com.yanty.friends.ws.service.impl.WebSocketServiceImpl;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;
@@ -24,14 +26,19 @@ public class WebSocketConfiguration implements WebSocketConfigurer {
     }
 
     @Bean
-    public WebSocket webSocket() {
-        return new WebSocketImpl();
+    public WebSocketService webSocket() {
+        return new WebSocketServiceImpl();
     }
 
     @Bean
     public WebSocketInterceptor webSocketInterceptor() {
         return new WebSocketInterceptor();
     }
+
+//    @Bean
+//    public MessageConverter messageConverter(){
+//        return new Jackson2JsonMessageConverter();
+//    }
 
     /**
      * 接口注册

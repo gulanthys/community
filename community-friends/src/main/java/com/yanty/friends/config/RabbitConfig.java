@@ -13,7 +13,7 @@ public class RabbitConfig implements RabbitMQConstant {
      *
      */
     @Bean
-    public Queue rabbitmqQueue() {
+    public Queue privateMessageQueue() {
         /**
          * 1、name:    队列名称
          * 2、durable: 是否持久化
@@ -22,15 +22,30 @@ public class RabbitConfig implements RabbitMQConstant {
          * */
         return new Queue(PRIVATE_MESSAGE_TOPIC, true, false, false);
     }
+    @Bean
+    public Queue systemNoticeIndividualQueue() {
+        return new Queue(SYSTEM_NOTICE_INDIVIDUAL_TOPIC, true, false, false);
+    }
+    @Bean
+    public Queue systemNoticeBroadcastQueue() {
+        return new Queue(SYSTEM_NOTICE_BROADCAST_TOPIC, true, false, false);
+    }
 
     /**
      * 声明交换机
      *
      */
     @Bean
-    public TopicExchange topicExchange() {
-        //Direct交换机
+    public TopicExchange privateMessageExchange() {
         return new TopicExchange(PRIVATE_MESSAGE_EXCHANGE, true, false);
+    }
+    @Bean
+    public TopicExchange systemNoticeIndividualExchange() {
+        return new TopicExchange(SYSTEM_NOTICE_INDIVIDUAL_EXCHANGE, true, false);
+    }
+    @Bean
+    public TopicExchange systemNoticeBroadcastExchange() {
+        return new TopicExchange(SYSTEM_NOTICE_BROADCAST_EXCHANGE, true, false);
     }
 
     /**
@@ -38,14 +53,22 @@ public class RabbitConfig implements RabbitMQConstant {
      *
      */
     @Bean
-    public Binding bindDirect() {
+    public Binding privateMessageBind() {
         //链式写法，绑定交换机和队列，并设置匹配键
         return BindingBuilder
         //绑定队列
-        .bind(rabbitmqQueue())
+        .bind(privateMessageQueue())
         //到交换机
-        .to(topicExchange())
+        .to(privateMessageExchange())
         //routing-key
         .with(PRIVATE_MESSAGE_ROUTING);
+    }
+    @Bean
+    public Binding systemNoticeIndividualBind() {
+        return BindingBuilder.bind(systemNoticeIndividualQueue()).to(systemNoticeIndividualExchange()).with(SYSTEM_NOTICE_INDIVIDUAL_ROUTING);
+    }
+    @Bean
+    public Binding systemNoticeBroadcastBind() {
+        return BindingBuilder.bind(systemNoticeBroadcastQueue()).to(systemNoticeBroadcastExchange()).with(SYSTEM_NOTICE_BROADCAST_ROUTING);
     }
 }

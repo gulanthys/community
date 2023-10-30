@@ -1,11 +1,9 @@
 package com.yanty.friends.ws.service;
 
-import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
-import java.util.Set;
 
 
 /**
@@ -25,7 +23,7 @@ import java.util.Set;
  * }
  *
  */
-public interface WebSocket {
+public interface WebSocketService {
     /**
      * 会话开始回调
      *
@@ -60,20 +58,20 @@ public interface WebSocket {
     /**
      * 发送消息
      *
-     * @param userId  用户id
+     * @param receiverId  接收者id
      * @param message 要发送的消息
      * @throws IOException 发送io异常
      */
-    void sendMessage(String userId, TextMessage message) throws IOException;
+    void sendMessage(String receiverId, TextMessage message) throws IOException;
 
     /**
      * 发送消息
      *
-     * @param userId  用户id
+     * @param receiverId  接收者id
      * @param message 要发送的消息
      * @throws IOException 发送io异常
      */
-    void sendMessage(String userId, String message) throws IOException;
+    void sendMessage(String receiverId, String message) throws IOException;
 
     /**
      * 发送消息

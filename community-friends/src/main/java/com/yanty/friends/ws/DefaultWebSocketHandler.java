@@ -1,6 +1,6 @@
 package com.yanty.friends.ws;
 
-import com.yanty.friends.ws.service.WebSocket;
+import com.yanty.friends.ws.service.WebSocketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.socket.*;
@@ -10,7 +10,7 @@ import java.io.IOException;
 public class DefaultWebSocketHandler implements WebSocketHandler {
 
     @Autowired
-    private WebSocket webSocket;
+    private WebSocketService webSocket;
 
     /**
      * 建立连接
