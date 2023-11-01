@@ -4,11 +4,16 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName(value = "private_message")
 public class PrivateMessage {
 
@@ -20,12 +25,12 @@ public class PrivateMessage {
   /**
    * 作者
    */
-  private long senderId;
+  private String senderId;
 
   /**
    * 读者
    */
-  private long receiverId;
+  private String receiverId;
 
   /**
    * 会话id
@@ -48,7 +53,7 @@ public class PrivateMessage {
    */
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
   @TableField(fill = FieldFill.INSERT)
-  private Timestamp createTime;
+  private Date createTime;
 
 
 

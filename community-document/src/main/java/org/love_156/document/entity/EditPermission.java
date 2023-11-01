@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "editor")
-public class Editor {
+@TableName(value = "edit_permission")
+public class EditPermission {
     /**
      * 文章id
      */
@@ -18,5 +18,12 @@ public class Editor {
      * 用户id
      */
     private Integer UserId;
+    /**
+     *  权限状态
+     *  1:作者
+     *  2:邀请者
+     *  3:被移除的邀请者
+     */
+    private Integer Permission;
 
 }

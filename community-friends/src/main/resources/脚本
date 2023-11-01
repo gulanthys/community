@@ -1,5 +1,3 @@
 nacos启动
 
-
-
-D:\nacos\bin\startup.cmd -m standalone
+D:\nacos-2.2.3\bin\startup.cmd -m standalone

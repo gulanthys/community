@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanty.friends.mapper.PrivateMessageMapper">
+
+    <insert id="insertBatch" parameterType="list">
+        insert into private_message (sender_id, receiver_id, conversation_id, content, `status`, create_time)
+        values
+        <foreach collection="list" item="p" separator="," index="index">
+            (#{p.senderId},#{p.receiverId},#{p.conversationId},#{p.content},#{p.status},#{p.createTime})
+        </foreach>
+    </insert>
+
+    <update id="createTable">
+        create table if not exists adf
+        (
+            id         int auto_increment primary key ,
+            collects    varchar(10) null,
+            article_id int         null
+        )ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COMMENT ='用于测试的用户表';
+    </update>
+
+
+</mapper>
