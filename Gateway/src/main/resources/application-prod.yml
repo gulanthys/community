@@ -7,6 +7,9 @@ spring:
     nacos:
       server-addr: localhost:8848 # nacos地址
     gateway:
+      discovery:
+        locator:
+          enabled: true
       routes: # 网关路由配置
         - id: System-Service #路由id，自定义，只要唯一即可
           uri: lb://System-Service #路由的目标地址 lb就是负载均衡，后面跟服务名称
