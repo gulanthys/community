@@ -23,7 +23,7 @@ public class EditController {
      * @return 是否创建成功
      */
     @PostMapping("/creat")
-    public Result<?> CreateDocument(@RequestBody Article article,@RequestParam("CreatorID") int creatorId){
+    public Result<?> CreateDocument(@RequestBody Article article,@RequestParam("creatorId") int creatorId){
         log.info("用户请求创建文章");
         log.info("文章标题是"+article.getTitle());
         boolean createArticle = editService.CreateArticle(article,creatorId);
@@ -40,7 +40,7 @@ public class EditController {
      * @return 文章本体
      */
     @GetMapping("/visit")
-    public Result<?> Visit(@RequestParam("articleID") int articleId ){
+    public Result<?> Visit(@RequestParam("articleId") int articleId ){
         log.info("用户正打算在浏览");
         Article article = editService.Visit(articleId);
         if (article == null){
@@ -78,13 +78,13 @@ public class EditController {
         }
     }
     @GetMapping("/edit/invite")
-    public Result<?> EditInvite(@RequestParam("ArticleId") int articleId,@RequestParam("EditorId") int editorId){
+    public Result<?> EditInvite(@RequestParam("articleId") int articleId,@RequestParam("editorId") int editorId){
         log.info("用户申请编辑权限");
 
         return Result.buildResult(Constants.Status.OK);
     }
     @GetMapping("/edit/delete")
-    public Result<?> EditDelete(@RequestParam("ArticleId") int articleId,@RequestParam("EditorId") int editorId){
+    public Result<?> EditDelete(@RequestParam("articleId") int articleId,@RequestParam("editorId") int editorId){
         String s = "删除本篇编辑";
 
         return Result.buildResult(Constants.Status.OK,s);
