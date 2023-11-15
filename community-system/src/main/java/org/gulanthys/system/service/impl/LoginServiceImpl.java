@@ -4,7 +4,6 @@ import jakarta.annotation.Resource;
 import org.community.common.Constants;
 import org.community.common.Result;
 import org.gulanthys.system.entity.LoginUser;
-import org.gulanthys.system.entity.User;
 import org.gulanthys.system.service.LoginService;
 import org.gulanthys.system.utils.JwtUtil;
 import org.gulanthys.system.utils.RedisUtil;
@@ -28,23 +27,11 @@ public class LoginServiceImpl implements LoginService {
     private AuthenticationManager authenticationManager;
 
     @Override
-    public Map<String, String> Login(User user) {
-        String login = null;
-        if (!Objects.isNull(user.getUid())) {
-            login = user.getUid().toString();
-        }
-        if (!Objects.isNull(user.getPhone())) {
-            login = user.getPhone();
-        }
-        if (!Objects.isNull(user.getEmail())) {
-            login = user.getEmail();
-        }
-        if (!Objects.isNull(user.getIdCard())) {
-            login = user.getIdCard();
-        }
+    public Map<String, String> Login(String userName, String password) {
+
         //存储认证信息
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(login, user.getPassword());
+                new UsernamePasswordAuthenticationToken(userName, password);
 
         //对认证信息进行认证
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);

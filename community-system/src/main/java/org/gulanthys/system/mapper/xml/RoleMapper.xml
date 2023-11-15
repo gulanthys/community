@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.gulanthys.system.mapper.RoleMapper">
+
+    <select id="selectRoleByUid" resultType="java.lang.String">
+        select sys_role.role_key
+        from sys_role
+                 left join sys_uid_role on sys_role.id = sys_uid_role.role_id
+                 left join sys_user su on sys_uid_role.uid = su.uid
+        where su.uid = #{uid}
+          and su.status = 0
+          and sys_role.status = 0
+    </select>
+    <select id="selectRoleByPath" resultType="java.lang.String">
+        select sys_role.role_key
+        from sys_role
+                 left join sys_role_menu srm on sys_role.id = srm.role_id
+                 left join sys_menu sm on srm.menu_id = sm.id
+        where sm.path = #{path}
+          and sm.status = 0
+          and sys_role.status = 0
+    </select>
+</mapper>

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import jakarta.annotation.Resource;
 import org.gulanthys.system.entity.LoginUser;
 import org.gulanthys.system.entity.User;
-import org.gulanthys.system.mapper.MenuMapper;
+import org.gulanthys.system.mapper.RoleMapper;
 import org.gulanthys.system.mapper.UserMapper;
 import org.gulanthys.system.service.LoginUserService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +19,7 @@ public class LoginUserServiceImpl implements LoginUserService {
     @Resource
     private UserMapper userMapper;
     @Resource
-    private MenuMapper menuMapper;
+    private RoleMapper roleMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -35,7 +35,7 @@ public class LoginUserServiceImpl implements LoginUserService {
             throw new UsernameNotFoundException("登录信息错误");
         }
         //TODO (授权，即查询用户具有哪些权限)查询对应的用户信息
-        List<String> list = menuMapper.selectPermsByUserId(user.getUid());
+        List<String> list = roleMapper.selectRoleByUid(user.getUid());
         //存在，将信息封装进UserDetails种
         return new LoginUser(user, list);
     }

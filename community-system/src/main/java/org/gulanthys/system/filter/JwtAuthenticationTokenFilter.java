@@ -48,8 +48,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         if (Objects.isNull(loginUser)) {
             throw new RuntimeException("用户未登录");
         }
-        // TODO 获取权限信息封装到Authentication中
-
+        //  获取权限信息封装到Authentication中
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
         //封装Authentication对象存入SecurityContextHolder
